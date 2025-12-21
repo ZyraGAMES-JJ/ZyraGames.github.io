@@ -1,104 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini Bing Browser</title>
+<meta charset="UTF-8">
+<title>Mini Bing Tab</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: white;
-      height: 100vh;
-    }
+<style>
+  body {
+    background:#121212;
+    color:white;
+    font-family:Arial, sans-serif;
+    padding:40px;
+  }
 
-    /* Open button */
-    #openBtn {
-      margin: 30px;
-      padding: 12px 20px;
-      font-size: 16px;
-      background: #008cff;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-    }
+  button {
+    padding:12px 20px;
+    font-size:16px;
+    background:#008cff;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+  }
 
-    #openBtn:hover {
-      background: #0073d1;
-    }
-
-    /* Mini browser window */
-    #browser {
-      display: none;
-      position: fixed;
-      top: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 520px;
-      height: 620px;
-      background: #1e1e1e;
-      border-radius: 10px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.7);
-      overflow: hidden;
-      z-index: 999;
-    }
-
-    /* Top bar */
-    #topBar {
-      height: 40px;
-      background: #2b2b2b;
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-    }
-
-    #topBar span {
-      flex-grow: 1;
-      font-size: 14px;
-    }
-
-    #closeBtn {
-      background: #ff5f57;
-      border: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    /* iframe */
-    iframe {
-      width: 100%;
-      height: calc(100% - 40px);
-      border: none;
-      background: white;
-    }
-  </style>
+  button:hover {
+    background:#0073d1;
+  }
+</style>
 </head>
 <body>
 
-  <button id="openBtn" onclick="openBrowser()">Open Bing</button>
+<h1>Mini Bing Tab</h1>
+<p>Opens Bing in its own small browser window.</p>
 
-  <div id="browser">
-    <div id="topBar">
-      <button id="closeBtn" onclick="closeBrowser()"></button>
-      <span> Bing </span>
-    </div>
+<button onclick="openBing()">Open Bing</button>
 
-    <iframe src="https://www.bing.com"></iframe>
-  </div>
-
-  <script>
-    function openBrowser() {
-      document.getElementById("browser").style.display = "block";
-    }
-
-    function closeBrowser() {
-      document.getElementById("browser").style.display = "none";
-    }
-  </script>
+<script>
+  function openBing() {
+    window.open(
+      "https://www.bing.com",
+      "BingTab",
+      "width=520,height=620,resizable=yes,scrollbars=yes"
+    );
+  }
+</script>
 
 </body>
 </html>
