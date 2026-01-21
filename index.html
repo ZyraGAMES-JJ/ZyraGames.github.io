@@ -1743,9 +1743,11 @@ setTimeout(() => {
 
     <div class="favicon-links">
       <span>Try these:</span>
-      <a href="#" data-icon="https://www.google.com/favicon.ico">Google</a> | 
-      <a href="#" data-icon="https://www.youtube.com/s/desktop/01c9a799/img/favicon.ico">YouTube</a> | 
-      <a href="#" data-icon="https://www.github.com/favicon.ico">GitHub</a>
+      <a href="#" data-icon="https://www.google.com/favicon.ico">🌐 Google</a> | 
+      <a href="#" data-icon="https://www.youtube.com/s/desktop/01c9a799/img/favicon.ico">📺 YouTube</a> | 
+      <a href="#" data-icon="https://www.github.com/favicon.ico">🐙 GitHub</a> | 
+      <a href="#" data-icon="https://www.twitter.com/favicon.ico">🐦 Twitter</a> | 
+      <a href="#" data-icon="https://www.reddit.com/favicon.ico">👽 Reddit</a>
     </div>
   </div>
 </div>
@@ -1779,6 +1781,8 @@ setTimeout(() => {
 .favicon-links {
   font-size: 12px;
   margin-top: 8px;
+  text-align:center;
+  line-height:1.4;
 }
 .favicon-links a {
   color: #b366ff;
@@ -1791,22 +1795,32 @@ setTimeout(() => {
 </style>
 
 <script>
+function changeFaviconAndTitle(targetDoc, title, favicon) {
+  // Change title
+  if(title) targetDoc.title = title;
+
+  // Change favicon
+  if(favicon){
+    let link = targetDoc.querySelector("link[rel~='icon']");
+    if(!link){
+      link = targetDoc.createElement('link');
+      link.rel = 'icon';
+      targetDoc.getElementsByTagName('head')[0].appendChild(link);
+    }
+    link.href = favicon;
+  }
+}
+
 document.getElementById("changeFaviconBtn").onclick = function() {
   const newTitle = document.getElementById("titleInput").value.trim();
   const newFavicon = document.getElementById("faviconInput").value.trim();
 
-  // Change title
-  if(newTitle) document.title = newTitle;
+  // Apply on current page
+  changeFaviconAndTitle(document, newTitle, newFavicon);
 
-  // Change favicon
-  if(newFavicon){
-    let link = document.querySelector("link[rel~='icon']");
-    if(!link){
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.getElementsByTagName('head')[0].appendChild(link);
-    }
-    link.href = newFavicon;
+  // Apply on about:blank window if open
+  if(window.aboutBlankWin && !window.aboutBlankWin.closed){
+    changeFaviconAndTitle(window.aboutBlankWin.document, newTitle, newFavicon);
   }
 };
 
@@ -1819,6 +1833,10 @@ document.querySelectorAll('.favicon-links a').forEach(a => {
     document.getElementById("changeFaviconBtn").click();
   });
 });
+
+// Optional: Open about:blank page for testing
+// window.aboutBlankWin = window.open("about:blank", "_blank");
+// window.aboutBlankWin.document.write("<h1>Welcome to About:Blank</h1>");
 </script>
 
 
