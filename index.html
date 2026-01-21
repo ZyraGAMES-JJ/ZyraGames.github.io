@@ -1772,43 +1772,5 @@ function openAboutBlank() {
   }
 }
 
-// Change favicon and title
-function changeFaviconAndTitle(targetDoc, title, favicon) {
-  if(title) targetDoc.title = title;
-
-  if(favicon){
-    let link = targetDoc.querySelector("link[rel~='icon']");
-    if(!link){
-      link = targetDoc.createElement('link');
-      link.rel = 'icon';
-      targetDoc.head.appendChild(link);
-    }
-    link.href = favicon;
-  }
-}
-
-// Main button
-document.getElementById("changeFaviconBtn").onclick = function() {
-  const newTitle = document.getElementById("titleInput").value.trim();
-  const newFavicon = document.getElementById("faviconInput").value.trim();
-
-  // Open the blank page if not already
-  openAboutBlank();
-
-  // Change favicon/title on blank page
-  changeFaviconAndTitle(aboutBlankWin.document, newTitle, newFavicon);
-};
-
-// Preset favicon links
-document.querySelectorAll('.favicon-links a').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const url = a.getAttribute('data-icon');
-    document.getElementById('faviconInput').value = url;
-    document.getElementById("changeFaviconBtn").click();
-  });
-});
-</script>
-
 
 
