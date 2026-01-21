@@ -1731,153 +1731,175 @@ setTimeout(() => {
 }, 5000);
 </script>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Favicon Changer</title>
+<meta charset="UTF-8">
+<title>Your AI Website</title>
 
-  <!-- Default favicon -->
-  <link id="favicon" rel="icon" href="https://www.google.com/favicon.ico">
+<!-- Favicon -->
+<link id="favicon" rel="icon" href="https://www.google.com/favicon.ico">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-    }
+<style>
+  :root {
+    --bg-black: #0b0b12;
+    --purple: #8a2be2;
+    --purple-dark: #5a189a;
+    --text: #eaeaf0;
+  }
 
-    .container {
-      max-width: 600px;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: var(--text);
+  }
 
-    h2 {
-      margin-top: 0;
-    }
+  /* Toggle Button */
+  .favicon-toggle {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+    border: none;
+    color: white;
+    padding: 12px 14px;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    z-index: 1001;
+  }
 
-    .favicon-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+  /* Sidebar */
+  .favicon-sidebar {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--bg-black);
+    border-left: 2px solid var(--purple-dark);
+    padding: 15px;
+    box-sizing: border-box;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
 
-    .favicon-item {
-      border: 2px solid transparent;
-      padding: 10px;
-      background: #eee;
-      border-radius: 6px;
-      cursor: pointer;
-      text-align: center;
-    }
+  .favicon-sidebar.open {
+    right: 0;
+  }
 
-    .favicon-item img {
-      width: 32px;
-      height: 32px;
-    }
+  .favicon-sidebar h3 {
+    margin-top: 0;
+    text-align: center;
+    color: var(--purple);
+  }
 
-    .favicon-item:hover {
-      background: #ddd;
-    }
+  .favicon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
 
-    .favicon-item.active {
-      border-color: #007bff;
-      background: #e0ecff;
-    }
+  .favicon-item {
+    background: #1a1a22;
+    border: 1px solid var(--purple-dark);
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+  }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
+  .favicon-item img {
+    width: 32px;
+    height: 32px;
+  }
 
-    button {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+  .favicon-item:hover {
+    background: var(--purple);
+  }
 
-    button:hover {
-      background: #0056b3;
-    }
-  </style>
+  .title-input {
+    width: 100%;
+    margin-top: 15px;
+    padding: 8px;
+    background: #1a1a22;
+    border: 1px solid var(--purple-dark);
+    color: white;
+    border-radius: 5px;
+  }
+
+  .apply-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
 </head>
+
 <body>
 
-<div class="container">
-  <h2>Favicon & Site Name Changer</h2>
+<!-- Toggle Button -->
+<button class="favicon-toggle" onclick="toggleFaviconUI()">🖼️</button>
 
-  <p>Select a favicon:</p>
-  <div class="favicon-grid" id="faviconGrid"></div>
+<!-- Favicon Sidebar -->
+<div class="favicon-sidebar" id="faviconUI">
+  <h3>Favicon Changer</h3>
 
-  <p>Website Name (Tab Title):</p>
-  <input type="text" id="siteName" placeholder="Enter website name">
+  <div class="favicon-grid">
+    <div class="favicon-item" onclick="setFavicon('https://www.google.com/favicon.ico')">
+      <img src="https://www.google.com/favicon.ico">
+    </div>
+    <div class="favicon-item" onclick="setFavicon('https://docs.google.com/favicon.ico')">
+      <img src="https://docs.google.com/favicon.ico">
+    </div>
+    <div class="favicon-item" onclick="setFavicon('https://classroom.google.com/favicon.ico')">
+      <img src="https://classroom.google.com/favicon.ico">
+    </div>
+    <div class="favicon-item" onclick="setFavicon('https://www.khanacademy.org/favicon.ico')">
+      <img src="https://www.khanacademy.org/favicon.ico">
+    </div>
+    <div class="favicon-item" onclick="setFavicon('https://www.wikipedia.org/static/favicon/wikipedia.ico')">
+      <img src="https://www.wikipedia.org/static/favicon/wikipedia.ico">
+    </div>
+    <div class="favicon-item" onclick="setFavicon('https://www.google.com/chrome/static/images/favicons/favicon.ico')">
+      <img src="https://www.google.com/chrome/static/images/favicons/favicon.ico">
+    </div>
+  </div>
 
-  <button onclick="applyChanges()">Change</button>
+  <input
+    class="title-input"
+    id="siteTitle"
+    placeholder="Website tab name"
+  >
+
+  <button class="apply-btn" onclick="applyTitle()">Apply Name</button>
 </div>
 
 <script>
-  const favicons = [
-    { name: "Google", url: "https://www.google.com/favicon.ico" },
-    { name: "Google Docs", url: "https://docs.google.com/favicon.ico" },
-    { name: "Google Classroom", url: "https://classroom.google.com/favicon.ico" },
-    { name: "Khan Academy", url: "https://www.khanacademy.org/favicon.ico" },
-    { name: "Wikipedia", url: "https://www.wikipedia.org/static/favicon/wikipedia.ico" },
-    { name: "School", url: "https://upload.wikimedia.org/wikipedia/commons/3/3f/School_icon.svg" },
-    { name: "Calculator", url: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Calculator_icon.svg" },
-    { name: "Folder", url: "https://upload.wikimedia.org/wikipedia/commons/5/59/Folder_Icon.svg" },
-    { name: "Notebook", url: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Notebook_icon.svg" },
-    { name: "Chrome", url: "https://www.google.com/chrome/static/images/favicons/favicon.ico" }
-  ];
-
-  let selectedFavicon = favicons[0].url;
-
-  const grid = document.getElementById("faviconGrid");
-
-  favicons.forEach((icon, index) => {
-    const div = document.createElement("div");
-    div.className = "favicon-item";
-    if (index === 0) div.classList.add("active");
-
-    div.innerHTML = `<img src="${icon.url}" alt="${icon.name}">`;
-    div.onclick = () => selectFavicon(div, icon.url);
-
-    grid.appendChild(div);
-  });
-
-  function selectFavicon(element, url) {
-    document.querySelectorAll(".favicon-item").forEach(item =>
-      item.classList.remove("active")
-    );
-    element.classList.add("active");
-    selectedFavicon = url;
+  function toggleFaviconUI() {
+    document.getElementById("faviconUI").classList.toggle("open");
   }
 
-  function applyChanges() {
-    const faviconLink = document.getElementById("favicon");
-    faviconLink.href = selectedFavicon;
+  function setFavicon(url) {
+    document.getElementById("favicon").href = url;
+  }
 
-    const newName = document.getElementById("siteName").value;
-    if (newName.trim() !== "") {
-      document.title = newName;
+  function applyTitle() {
+    const title = document.getElementById("siteTitle").value;
+    if (title.trim() !== "") {
+      document.title = title;
     }
   }
 </script>
 
 </body>
 </html>
-
 
 
 
