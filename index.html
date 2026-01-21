@@ -1644,4 +1644,90 @@ inputEl.onkeydown = e => {
 
 <body>
 
+<!-- ZyraAi Startup Animation -->
+<div id="startup-screen">
+  <div id="startup-text">
+    <span id="main-text"></span>
+    <span id="sub-text"></span>
+  </div>
+</div>
+
+<style>
+#startup-screen {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: linear-gradient(135deg,#000000,#2b0033);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10000;
+}
+
+#startup-text {
+  text-align:center;
+  color:#b366ff;
+  font-family:'Courier New', monospace;
+}
+
+#main-text {
+  font-size:60px;
+  font-weight:bold;
+  background: linear-gradient(90deg,#9b59ff,#b366ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display:block;
+  margin-bottom:10px;
+}
+
+#sub-text {
+  font-size:20px;
+  color:#e6ccff;
+  display:block;
+}
+
+/* Fade out animation */
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+@keyframes fadeOut {
+  to { opacity:0; visibility:hidden; }
+}
+</style>
+
+<script>
+const mainText = "Zyra Ai";
+const subText = "by Josh Johnson";
+
+let mainIndex = 0;
+let subIndex = 0;
+
+function typeMain() {
+  if(mainIndex < mainText.length){
+    document.getElementById("main-text").textContent += mainText[mainIndex];
+    mainIndex++;
+    setTimeout(typeMain, 120);
+  } else {
+    setTimeout(typeSub, 500); // small delay before typing sub text
+  }
+}
+
+function typeSub() {
+  if(subIndex < subText.length){
+    document.getElementById("sub-text").textContent += subText[subIndex];
+    subIndex++;
+    setTimeout(typeSub, 100);
+  }
+}
+
+typeMain();
+
+// Remove startup screen after 5 seconds
+setTimeout(() => {
+  document.getElementById("startup-screen").classList.add("fade-out");
+}, 5000);
+</script>
 
