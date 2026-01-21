@@ -1731,46 +1731,6 @@ setTimeout(() => {
 }, 5000);
 </script>
 
-<!-- Favicon & Title Changer for About:Blank Pages -->
-<div class="widget">
-  <div class="favicon-card card-hover square-card">
-    <div class="title">🎨 Favicon & Title Changer</div>
-    
-    <input type="text" id="titleInput" placeholder="New website title" class="favicon-input"/>
-    <input type="text" id="faviconInput" placeholder="Favicon URL" class="favicon-input"/>
-    
-    <button id="changeFaviconBtn" class="zyra-button" style="margin-top:6px;">✨ Change!</button>
-
-    <div class="favicon-links">
-      <span>Try these:</span>
-      <a href="#" data-icon="https://www.google.com/favicon.ico">🌐 Google</a> | 
-      <a href="#" data-icon="https://www.youtube.com/s/desktop/01c9a799/img/favicon.ico">📺 YouTube</a> | 
-      <a href="#" data-icon="https://www.github.com/favicon.ico">🐙 GitHub</a>
-    </div>
-  </div>
-</div>
-
-<script>
-let aboutBlankWin = null;
-
-// Open about:blank page when the page loads
-function openAboutBlank() {
-  if(!aboutBlankWin || aboutBlankWin.closed){
-    aboutBlankWin = window.open("about:blank", "_blank");
-    aboutBlankWin.document.write(`
-      <html>
-      <head>
-        <title>Empty Page</title>
-        <link rel="icon" href="">
-      </head>
-      <body style="background:black; color:white; display:flex; align-items:center; justify-content:center; font-family:sans-serif;">
-        <h1>Welcome to your custom page!</h1>
-      </body>
-      </html>
-    `);
-    aboutBlankWin.document.close();
-  }
-}
 
 
 
