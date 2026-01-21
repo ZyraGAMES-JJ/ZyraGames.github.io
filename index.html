@@ -1731,3 +1731,94 @@ setTimeout(() => {
 }, 5000);
 </script>
 
+<!-- Favicon & Title Changer Widget -->
+<div class="widget">
+  <div class="favicon-card card-hover square-card">
+    <div class="title">🎨 Favicon & Title Changer</div>
+    
+    <input type="text" id="titleInput" placeholder="New website title" class="favicon-input"/>
+    <input type="text" id="faviconInput" placeholder="Favicon URL" class="favicon-input"/>
+    
+    <button id="changeFaviconBtn" class="zyra-button" style="margin-top:6px;">✨ Change!</button>
+
+    <div class="favicon-links">
+      <span>Try these:</span>
+      <a href="#" data-icon="https://www.google.com/favicon.ico">Google</a> | 
+      <a href="#" data-icon="https://www.youtube.com/s/desktop/01c9a799/img/favicon.ico">YouTube</a> | 
+      <a href="#" data-icon="https://www.github.com/favicon.ico">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.favicon-card {
+  background: radial-gradient(circle at top,#2b0033,#000);
+  color:#e6ccff;
+  box-shadow: 0 8px 25px rgba(128,0,255,0.4);
+  text-align:center;
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 280px; 
+  padding: 15px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.favicon-input {
+  width: 80%;
+  padding: 6px 8px;
+  margin: 4px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  color: #e6ccff;
+}
+.favicon-links {
+  font-size: 12px;
+  margin-top: 8px;
+}
+.favicon-links a {
+  color: #b366ff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.favicon-links a:hover {
+  text-decoration: underline;
+}
+</style>
+
+<script>
+document.getElementById("changeFaviconBtn").onclick = function() {
+  const newTitle = document.getElementById("titleInput").value.trim();
+  const newFavicon = document.getElementById("faviconInput").value.trim();
+
+  // Change title
+  if(newTitle) document.title = newTitle;
+
+  // Change favicon
+  if(newFavicon){
+    let link = document.querySelector("link[rel~='icon']");
+    if(!link){
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+    link.href = newFavicon;
+  }
+};
+
+// Add click event for preset favicons
+document.querySelectorAll('.favicon-links a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const url = a.getAttribute('data-icon');
+    document.getElementById('faviconInput').value = url;
+    document.getElementById("changeFaviconBtn").click();
+  });
+});
+</script>
+
+
